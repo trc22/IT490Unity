@@ -1,18 +1,30 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using Mirror;
 using UnityEngine;
 
-public class Player : MonoBehaviour
+public class Player : NetworkBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    public Transform playerTransform;
+    float accel = 0.8f;
+    void Movement()
     {
-        
+        if(isLocalPlayer)
+        {   
+            if (Input.GetKey("up"))
+            {
+                if (playerTransform.position.y < 7f) //Upper limit
+                    playerTransform.position += Vector3.up * accel;
+            }
+            if (Input.GetKey("down"))
+            {
+                if (playerTransform.position.y > -4.5f) //Lower limit
+                    playerTransform.position += Vector3.down * accel;
+            }
+        }
     }
 
     // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
-        
+        Movement();
     }
 }
