@@ -7,7 +7,7 @@ public class MyNetworkManager : NetworkManager
 {
     public Transform lSpawn, rSpawn;
     private int playerCount;
-    GameObject player;
+    GameObject player, ball;
 
 
     public override void OnStartServer()
@@ -39,6 +39,8 @@ public class MyNetworkManager : NetworkManager
         {
             player = Instantiate(playerPrefab, rSpawn.position, rSpawn.rotation);
             //Spawn ball
+            ball = Instantiate(spawnPrefabs.Find(prefab => prefab.name == "Ball"));
+            NetworkServer.Spawn(ball);
         }
 
         NetworkServer.AddPlayerForConnection(conn, player);
@@ -49,5 +51,15 @@ public class MyNetworkManager : NetworkManager
     {
         playerCount --;
         Debug.Log("Disconnected from Server!");
+    }
+
+    public override void OnServerDisconnect(NetworkConnection conn)
+    {
+        // destroy ball
+        if (ball != null)
+        NetworkServer.Destroy(ball);
+
+        // call base functionality (actually destroys the player)
+        base.OnServerDisconnect(conn);
     }
 }
