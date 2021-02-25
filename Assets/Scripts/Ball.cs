@@ -4,7 +4,11 @@ using UnityEngine;
 public class Ball : NetworkBehaviour
 {
     public Rigidbody2D ball_rigidBody;
-
+    enum Weather
+    {
+        REGULAR, RAIN, HOT, SNOW, HAIL, WIND, THUNDER
+    }
+    Weather currentWeather = Weather.REGULAR;
     public override void OnStartServer()
     {
         base.OnStartServer();

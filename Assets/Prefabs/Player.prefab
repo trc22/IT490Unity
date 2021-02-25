@@ -220,6 +220,7 @@ MonoBehaviour:
   syncMode: 0
   syncInterval: 0.1
   playerTransform: {fileID: 2060714281064709877}
+  currentWeather: 0
 --- !u!114 &2060714281064709875
 MonoBehaviour:
   m_ObjectHideFlags: 0
