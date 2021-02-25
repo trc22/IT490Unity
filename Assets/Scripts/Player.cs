@@ -5,6 +5,7 @@ public class Player : NetworkBehaviour
 {
     public Transform playerTransform;
     float accel = 0.8f;
+    public Animator WeatherStage;
     enum Weather
     {
         REGULAR, RAIN, HOT, SNOW, HAIL, WIND, THUNDER
@@ -26,37 +27,46 @@ public class Player : NetworkBehaviour
     void WeatherEffect()
     {
         //regular speed
-        if (currentWeather == Weather.REGULAR) Speed(accel);
+        if (currentWeather == Weather.REGULAR)
+        {
+            SpeedAndWeather(accel,(int)currentWeather);
+        }
         //super speed
-        else if (currentWeather == Weather.HOT) Speed(accel*4);
+        else if (currentWeather == Weather.HOT)
+        {
+            SpeedAndWeather(accel * 4, (int)currentWeather);
+        }
         //speed decrease/ slip
-        else if (currentWeather == Weather.RAIN) Speed(accel/4);
-
+        else if (currentWeather == Weather.RAIN)
+        {
+            SpeedAndWeather(accel / 4, (int)currentWeather);
+        }
         //move on steps
         else if (currentWeather == Weather.SNOW)
         {
-            Speed(accel);
+            SpeedAndWeather(accel, (int)currentWeather);
         }
 
         //hit by hail/ pushed down from time to time
         else if (currentWeather == Weather.HAIL)
         {
-            Speed(accel);
+            SpeedAndWeather(accel, (int)currentWeather);
         }
         //move fast
         else if (currentWeather == Weather.WIND)
         {
-            Speed(accel);
+            SpeedAndWeather(accel, (int)currentWeather);
         }
         //move fast on bursts
         else if (currentWeather == Weather.THUNDER)
         {
-            Speed(accel);
+            SpeedAndWeather(accel, (int)currentWeather);
         }
     }
 
-    void Speed(float accel)
-    {
+    void SpeedAndWeather(float accel, int Stage)
+    { 
+        WeatherStage.SetInteger("Weather", Stage);
         if (Input.GetKey("up"))
         {
             if (playerTransform.position.y < 7f) //Upper limit

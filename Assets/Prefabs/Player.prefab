@@ -220,6 +220,7 @@ MonoBehaviour:
   syncMode: 0
   syncInterval: 0.1
   playerTransform: {fileID: 2060714281064709877}
+  WeatherStage: {fileID: 6430257390238323727}
   currentWeather: 0
 --- !u!114 &2060714281064709875
 MonoBehaviour:
