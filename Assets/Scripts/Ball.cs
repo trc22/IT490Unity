@@ -3,23 +3,28 @@ using UnityEngine;
 
 public class Ball : NetworkBehaviour
 {
-    public Rigidbody2D rigidbody2d;
+    public Rigidbody2D ball_rigidBody;
 
     public override void OnStartServer()
     {
         base.OnStartServer();
 
         // only simulate ball physics on server
-        rigidbody2d.simulated = true;
+        ball_rigidBody.simulated = true;
 
         // Serve the ball from left player
-        rigidbody2d.velocity = Vector2.right;
+        ball_rigidBody.velocity = Vector2.right * 2f;
     }
 
     [ServerCallback]
     void OnCollisionEnter2D(Collision2D col)
     {
         Debug.Log("Collision!");
+        //Paddle physics
+        if (col.collider.offset.y == 0.32f) //if hit top collider
+            ball_rigidBody.velocity += (Vector2.up);
+        else if (col.collider.offset.y == -0.32f) //if hit bottom collider
+            ball_rigidBody.velocity += (Vector2.down);
     }
 
 }

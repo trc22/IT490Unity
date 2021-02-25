@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 9083496041425600008}
   - component: {fileID: 9083496041425600009}
-  - component: {fileID: 9083496041425600012}
+  - component: {fileID: -5243698252635678875}
   - component: {fileID: 9083496041425600013}
   - component: {fileID: 9083496041425600010}
   - component: {fileID: 202548380098813508}
@@ -86,8 +86,8 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!61 &9083496041425600012
-BoxCollider2D:
+--- !u!58 &-5243698252635678875
+CircleCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -100,18 +100,8 @@ BoxCollider2D:
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 0.2, y: 0.2}
-    newSize: {x: 0.2, y: 0.2}
-    adaptiveTilingThreshold: 0.5
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.17, y: 0.17}
-  m_EdgeRadius: 0
+  m_Radius: 0.1
 --- !u!50 &9083496041425600013
 Rigidbody2D:
   serializedVersion: 4
@@ -163,7 +153,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   syncMode: 0
   syncInterval: 0.1
-  rigidbody2d: {fileID: 9083496041425600013}
+  ball_rigidBody: {fileID: 9083496041425600013}
 --- !u!114 &9083496041425600011
 MonoBehaviour:
   m_ObjectHideFlags: 0
