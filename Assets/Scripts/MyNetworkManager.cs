@@ -62,4 +62,5 @@ public class MyNetworkManager : NetworkManager
         // call base functionality (actually destroys the player)
         base.OnServerDisconnect(conn);
     }
+
 }

@@ -11,12 +11,12 @@ public class Player : NetworkBehaviour
         {   
             if (Input.GetKey("up"))
             {
-                if (playerTransform.position.y < 7f) //Upper limit
+                if (playerTransform.position.y < 7.2f) //Upper limit
                     playerTransform.position += Vector3.up * accel;
             }
             if (Input.GetKey("down"))
             {
-                if (playerTransform.position.y > -4.5f) //Lower limit
+                if (playerTransform.position.y > -4.85f) //Lower limit
                     playerTransform.position += Vector3.down * accel;
             }
         }
