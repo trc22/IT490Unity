@@ -19,7 +19,6 @@ public class Game : NetworkBehaviour
         GetText();
         lScore = 0;
         rScore = 0;
-        //UpdateScores();
     }
 
     void Update()
@@ -39,7 +38,17 @@ public class Game : NetworkBehaviour
         {
             rScore ++;
         }
-        //UpdateScores();
+
+        if(lScore == 7) //Left wins
+        {
+
+        }
+
+        if (rScore == 7) //Right wins
+        {
+
+        }
+
     }
 
     void RpcSyncScores(int lVar, int rVar)
@@ -67,6 +76,18 @@ public class Game : NetworkBehaviour
     
         UpdateNames();
 
+    }
+
+    void GameOver(int x)
+    {
+        if(x == 0) //Left wins
+        {
+            
+        }
+        else //Right wins
+        {
+
+        }
     }
 
     public void GetText()

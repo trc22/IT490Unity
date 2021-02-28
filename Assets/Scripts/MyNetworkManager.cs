@@ -70,4 +70,10 @@ public class MyNetworkManager : NetworkManager
         base.OnServerDisconnect(conn);
     }
 
+    public void EndGame()
+    {
+        if (ball != null)
+            NetworkServer.Destroy(ball);
+    }
+
 }
