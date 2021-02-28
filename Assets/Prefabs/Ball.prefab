@@ -154,6 +154,7 @@ MonoBehaviour:
   syncMode: 0
   syncInterval: 0.1
   ball_rigidBody: {fileID: 9083496041425600013}
+  gameManager: {fileID: 0}
 --- !u!114 &9083496041425600011
 MonoBehaviour:
   m_ObjectHideFlags: 0

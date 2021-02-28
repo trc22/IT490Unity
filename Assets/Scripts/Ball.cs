@@ -4,11 +4,13 @@ using UnityEngine;
 public class Ball : NetworkBehaviour
 {
     public Rigidbody2D ball_rigidBody;
+    public GameObject gameManager;
 
     public override void OnStartServer()
     {
-        base.OnStartServer();
+        gameManager = GameObject.FindGameObjectWithTag("GameManager");
 
+        base.OnStartServer();
         // only simulate ball physics on server
         ball_rigidBody.simulated = true;
 
@@ -31,13 +33,23 @@ public class Ball : NetworkBehaviour
 
     void FixedUpdate()
     {
+        if(gameManager == null)
+                gameManager = GameObject.FindGameObjectWithTag("GameManager");
+    }
+
+    void OnTriggerEnter2D(Collider2D col)
+    {
         if (ball_rigidBody.position.x > 17f) //If left scored
         {
+            Debug.Log("Scored!");
+            gameManager.GetComponent<Game>().Scored(0);
             ResetBall();
         }
 
         if(ball_rigidBody.position.x < -17f) //If right scored
         {
+            Debug.Log("Scored!");
+            gameManager.GetComponent<Game>().Scored(1);
             ResetBall();
         }
     }
@@ -56,4 +68,6 @@ public class Ball : NetworkBehaviour
         else
             ball_rigidBody.velocity = Vector2.left * 3f;
     }
+
+
 }
