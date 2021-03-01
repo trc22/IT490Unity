@@ -6,15 +6,20 @@ public class Game : NetworkBehaviour
 {
     [SyncVar] int lScore;
     [SyncVar] int rScore;
-    private string lName, rName;
+    private string lName = "Left";
+    private string rName = "Right";
+    private string victor = "";
     public Text lScore_text, rScore_text;
-    public Text lName_text, rName_text;
+    public Text lName_text, rName_text, result_text;
+    public GameObject networkManager;
     
 
     public override void OnStartServer()
     {
         base.OnStartServer();
         Debug.Log("Game Manager is active");
+
+        networkManager = GameObject.FindGameObjectWithTag("NetworkManager");
 
         GetText();
         lScore = 0;
@@ -25,29 +30,18 @@ public class Game : NetworkBehaviour
     {
         if(lScore_text == null)
             GetText();
+        if(networkManager == null)
+            networkManager = GameObject.FindGameObjectWithTag("NetworkManager");
         RpcSyncScores(lScore, rScore);
+        RpcSyncWinner(victor);
     }
 
     public void Scored(int x)
     {
         if(x == 0) //Left scored
-        {
             lScore ++;
-        }
         else //Right scored
-        {
             rScore ++;
-        }
-
-        if(lScore == 7) //Left wins
-        {
-
-        }
-
-        if (rScore == 7) //Right wins
-        {
-
-        }
 
     }
 
@@ -59,7 +53,21 @@ public class Game : NetworkBehaviour
         rScore_text.text = (""+rScore);
     }
 
-    
+    void RpcSyncWinner(string winner)
+    {
+        victor = winner;
+        if(lScore == 1) //Left wins
+        {
+            victor = (lName + " wins!");
+            GameOver();
+        }
+        else if (rScore == 1) //Right wins
+        {
+            victor = (rName + " wins!");
+            GameOver();
+        }
+        result_text.text = victor;
+    }
 
     void UpdateNames()
     {
@@ -78,16 +86,10 @@ public class Game : NetworkBehaviour
 
     }
 
-    void GameOver(int x)
+    [ServerCallback]
+    void GameOver()
     {
-        if(x == 0) //Left wins
-        {
-            
-        }
-        else //Right wins
-        {
-
-        }
+        networkManager.GetComponent<MyNetworkManager>().EndGame();
     }
 
     public void GetText()
@@ -96,5 +98,6 @@ public class Game : NetworkBehaviour
         rScore_text = GameObject.Find("RScore").GetComponent<Text>();
         lName_text = GameObject.Find("LName").GetComponent<Text>();
         rName_text = GameObject.Find("RName").GetComponent<Text>();
+        result_text = GameObject.Find("Results").GetComponent<Text>();
     }
 }

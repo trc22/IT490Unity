@@ -7,6 +7,7 @@ TagManager:
   - GameManager
   - UI
   - Boundary
+  - NetworkManager
   layers:
   - Default
   - TransparentFX
