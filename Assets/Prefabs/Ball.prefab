@@ -155,6 +155,9 @@ MonoBehaviour:
   syncMode: 0
   syncInterval: 0.1
   ball_rigidBody: {fileID: 9083496041425600013}
+  WeatherStage: {fileID: 7214667413619069042}
+  mySprite: {fileID: 9083496041425600009}
+  currentWeather: 1
 --- !u!114 &9083496041425600011
 MonoBehaviour:
   m_ObjectHideFlags: 0
