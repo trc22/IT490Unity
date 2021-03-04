@@ -1,12 +1,15 @@
 ﻿using Mirror;
 using UnityEngine;
+using System.Collections;
 
 public class Ball : NetworkBehaviour
 {
     public Rigidbody2D ball_rigidBody;
+    
     public Animator WeatherStage;
+    
     public SpriteRenderer mySprite;
-    private bool change;
+    private bool change = false;
     
     private int delay =100;
     enum Weather
@@ -25,26 +28,47 @@ public class Ball : NetworkBehaviour
         // Serve the ball from left player
         ball_rigidBody.velocity = Vector2.right * 2f;
     }
+    [ClientCallback]
+    void OnCollisionEnter2Ds(Collision2D col)
+    {
+        Debug.Log("Collision!");
+        //Paddle physics
+        if (col.collider.offset.y != -2.88f || col.collider.offset.y != -2.88f)
+        {
+            if (mySprite.flipX != true) mySprite.flipX = true;
 
+            else mySprite.flipX = false;
+        }
+    }
     [ServerCallback]
     void OnCollisionEnter2D(Collision2D col)
     {
         Debug.Log("Collision!");
         //Paddle physics
-        if (mySprite.flipX != true)
+        if(col.collider.offset.y != -2.88f || col.collider.offset.y != -2.88f)
         {
-            mySprite.flipX = true;
+            if (mySprite.flipX != true) mySprite.flipX = true;
+
+            else mySprite.flipX = false;
         }
-        else
-        {
-            mySprite.flipX = false;
-        }
+        
         
         WeatherEffect(col);
     }
     private void Update()
     {
         WeatherStage.SetInteger("Weather_Ball", (int)currentWeather);  
+    }
+
+    IEnumerator Wait(Collision2D col)
+    {
+        change = false;
+        SpeedAndWeather(2f, col);
+        yield return new WaitForSeconds(1.2f);
+        change = false;
+        SpeedAndWeather(.5f, col);
+        
+        
     }
 
     void WeatherEffect(Collision2D col)
@@ -58,28 +82,22 @@ public class Ball : NetworkBehaviour
         //super speed
         else if (currentWeather == Weather.HOT)
         {
-            SpeedAndWeather(2f, col);
+            SpeedAndWeather(3f, col);
                
             
         }
         //speed decrease/ slip
         else if (currentWeather == Weather.RAIN)
         {
-            SpeedAndWeather(0.5f, col);
+            SpeedAndWeather(0.75f, col);
 
         }
         //move on steps
         else if (currentWeather == Weather.SNOW)
         {
-            if (delay != 100)
-            {
-                delay += 10;
-                if (delay < 50)
-                {
-                    SpeedAndWeather(1f, col);
-                }
-            }
-            else delay = 0;
+
+            SpeedAndWeather(0.50f, col);
+
         }
 
         //hit by hail/ pushed down from time to time
@@ -90,26 +108,13 @@ public class Ball : NetworkBehaviour
         //move fast
         else if (currentWeather == Weather.WIND)
         {
-            SpeedAndWeather(1f, col);
-            if (delay < 200)
-            {
-                if (delay > 100)
-                {
-                    SpeedAndWeather(2f, col);
-                }
-                else
-                {
-                    SpeedAndWeather(0.5f, col);
-                }
-                delay += 5;
-            }
-            else delay = 0;
+            StartCoroutine(Wait(col));
 
         }
         //move fast on bursts
         else if (currentWeather == Weather.THUNDER)
         {
-            if (delay <200)
+            while (delay <200)
             {
                 delay += 5;
                 if (delay > 60)
@@ -125,20 +130,82 @@ public class Ball : NetworkBehaviour
 
     void SpeedAndWeather(float speed, Collision2D col)
     {
-        
-        if (col.collider.offset.y == 0.08f) //if hit top collider
-            ball_rigidBody.velocity += (Vector2.up)*speed;
-        if (col.collider.offset.y == 0.0f)
+        //if hit top collider
+
+        if (col.collider.offset.y == 0.08f)
         {
-            if (change)
+            if (!change)
             {
-                ball_rigidBody.velocity *= speed;
+                ball_rigidBody.velocity += (Vector2.up) * speed;
+                change = true;
             }
-            
+            else
+            {
+                ball_rigidBody.velocity += (Vector2.up);
+            }
+
 
         }
-        else if (col.collider.offset.y == -0.08f) //if hit bottom collider
-            ball_rigidBody.velocity += (Vector2.down)*speed;
+        //if hit middle collider
+
+        else if (col.collider.offset.y == 0.0f)
+        {
+            if (!change)
+            {
+                ball_rigidBody.velocity *= speed;
+                change = true;
+            }
+            else
+            {
+                ball_rigidBody.velocity += Vector2.right;
+            }
+        }
+
+        //if hit bottom collider
+
+        else if (col.collider.offset.y == -0.08f) {
+            if (!change)
+            {
+                ball_rigidBody.velocity += (Vector2.down) * speed;
+                change = true;
+            }
+            else
+            {
+                ball_rigidBody.velocity += (Vector2.down);
+            }
+        }
+
+        //hits top Boundary
+
+        else if (col.collider.offset.y == -2.88f)
+        {
+            if (!change)
+            {
+                ball_rigidBody.velocity += (Vector2.down) * speed;
+                change = true;
+            }
+            else
+            {
+                ball_rigidBody.velocity += (Vector2.down);
+            }
+        }
+        
+
+        //hits bottom Boundary
+
+        else if (col.collider.offset.y == 2.88f)
+        {
+            if (!change)
+            {
+                ball_rigidBody.velocity += (Vector2.up) * speed;
+                change = true;
+            }
+            else
+            {
+                ball_rigidBody.velocity += (Vector2.up);
+            }
+        }
+        
     }
 
 }
