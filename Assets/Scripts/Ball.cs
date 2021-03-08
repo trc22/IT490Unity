@@ -15,12 +15,13 @@ public class Ball : NetworkBehaviour
                                 // as its to check that it does not infinetly increase its speed.
     
     
-    enum Weather
+    enum Weather //stages Weather into Numbers
     {
         REGULAR, RAIN, HOT, SNOW, HAIL, WIND, THUNDER
     }
-    [SerializeField] Weather currentWeather = Weather.REGULAR;
-    enum Stages
+    [SerializeField] Weather currentWeather = Weather.REGULAR;//sets it to the Default of Regular
+
+    enum Stages //This is specific for Thunder as it needs to be staged so its modifiers are on and if it goes at normal or gast speed
     {
         OFF, NORMAL, FAST
     }
@@ -69,7 +70,8 @@ public class Ball : NetworkBehaviour
                 gameManager = GameObject.FindGameObjectWithTag("GameManager");
         if(webManager == null)
             webManager= GameObject.Find("WebManager");
-         WeatherStage.SetInteger("Weather_Ball", (int)currentWeather);  
+        
+         WeatherStage.SetInteger("Weather_Ball", (int)currentWeather);  //sets the Animations for the weather according to the currentWeather
     }
 
     void OnTriggerEnter2D(Collider2D col)
@@ -179,11 +181,11 @@ public class Ball : NetworkBehaviour
         
     }
 
-    void WeatherEffect(Collision2D col)
+    void WeatherEffect(Collision2D col) 
     {
         Debug.Log("Speed: "+ ball_rigidBody.velocity);
         //regular speed
-        if (currentWeather == Weather.REGULAR)
+        if (currentWeather == Weather.REGULAR) 
         {
             SpeedAndWeather(1f,col);
         }
@@ -237,20 +239,22 @@ public class Ball : NetworkBehaviour
         }
     }
 
-    void SpeedAndWeather(float speed, Collision2D col)
+    void SpeedAndWeather(float speed, Collision2D col) //speed is the increase or decrease of speed per collision, and col is just the collider
     {
         //if hit top collider
-        if (currentStage != Stages.OFF)
+        if (currentStage != Stages.OFF) //checks if Stages for THunder are off, if on it will make it so the speed can change every time it collides
         {
             change = false;
         }
-        if (col.collider.offset.y == 0.08f)
+
+        //if collider hit top collider
+        if (col.collider.offset.y == 0.08f) 
         {
             
-            if (!change)
+            if (!change) //if the speed has not changed before it does, this is done so speed doesnt go infinetly up or down
             {
-                ball_rigidBody.velocity += (Vector2.up) * speed;
-                change = true;
+                ball_rigidBody.velocity += (Vector2.up) * speed; //goes up by the normal speed * speed added
+                change = true; //sets change to true for next collision
             }
             else
             {
@@ -265,7 +269,7 @@ public class Ball : NetworkBehaviour
         {
             if (!change)
             {
-                ball_rigidBody.velocity *= speed;
+                ball_rigidBody.velocity *= speed; //goes middle by the speed added
                 change = true;
             }
             else
@@ -279,7 +283,7 @@ public class Ball : NetworkBehaviour
         else if (col.collider.offset.y == -0.08f) {
             if (!change)
             {
-                ball_rigidBody.velocity += (Vector2.down) * speed;
+                ball_rigidBody.velocity += (Vector2.down) * speed; //goes down by the normal speed * speed added
                 change = true;
             }
             else
