@@ -5,7 +5,7 @@ using System.Collections;
 public class Ball : NetworkBehaviour
 {
     public Rigidbody2D ball_rigidBody;
-    public GameObject gameManager;
+    public GameObject gameManager, webManager;
 
     public Animator WeatherStage;
     
@@ -33,6 +33,11 @@ public class Ball : NetworkBehaviour
         base.OnStartServer();
         // only simulate ball physics on server
         ball_rigidBody.simulated = true;
+
+        webManager= GameObject.Find("WebManager");
+
+
+        SetWeather(webManager.GetComponent<Web>().GetTemp(), webManager.GetComponent<Web>().GetStatus());
 
         if(Random.Range(0f, 2f) > 1f) //Serve ball in random dir
             ball_rigidBody.velocity = Vector2.right * 3f;
@@ -62,7 +67,8 @@ public class Ball : NetworkBehaviour
     {
         if(gameManager == null)
                 gameManager = GameObject.FindGameObjectWithTag("GameManager");
-        
+        if(webManager == null)
+            webManager= GameObject.Find("WebManager");
          WeatherStage.SetInteger("Weather_Ball", (int)currentWeather);  
     }
 
@@ -96,6 +102,62 @@ public class Ball : NetworkBehaviour
             ball_rigidBody.velocity = Vector2.right * 3f;
         else
             ball_rigidBody.velocity = Vector2.left * 3f;
+    }
+
+    void SetWeather(float temp, string status)
+    {
+        Debug.Log("temp: " + temp + " status: " + status);
+        //Prioritize status effects over temp effects
+
+        //Status effects:
+        if(status == "rain" || status == "light rain" || status == "moderate rain" || status == "heavy intensity rain")
+        {
+            Debug.Log("Setting weather to rain!");
+            currentWeather = Weather.RAIN;
+            return;
+        }
+
+        if(status == "Snow" || status == "light snow" || status == "Heavy Snow")
+        {
+            Debug.Log("Setting weather to snow!");
+            currentWeather = Weather.SNOW;
+            return;
+        }
+
+        if(status == "freezing rain")
+        {
+            Debug.Log("Setting weather to hail!");
+            currentWeather = Weather.HAIL;
+            return;
+        }
+        if(status == " thunderstorm" || status == " light thunderstorm " || status == " thunderstorm with rain " || status == "heavy thunderstorm")
+        {
+            Debug.Log("Setting weather to thunder!");
+            currentWeather = Weather.THUNDER;
+            return;
+        } 
+        if(Random.Range(0f, 2f) > 1f)
+        {
+            Debug.Log("Setting weather to windy!");
+            currentWeather = Weather.WIND;
+            return;
+        }
+        if(temp > 303f)
+        {
+            Debug.Log("Setting weather to hot!");
+            currentWeather = Weather.HOT;
+            return;
+        }
+        if(temp < 278f)
+        {
+            Debug.Log("Setting weather to cold!");
+            currentWeather = Weather.HAIL;
+            return;
+        }
+            Debug.Log("Setting weather to regular");
+            currentWeather = Weather.REGULAR;
+            return;
+        
     }
 
     IEnumerator Wait(Collision2D col,float start, float end, float secs)

@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using UnityEngine.Networking;
 using System.Collections;
+using System;
 
 // UnityWebRequest.Get example
 
@@ -9,12 +10,14 @@ using System.Collections;
 
 public class Web : MonoBehaviour
 {
+    string temp, status;
 
     void Awake()
     {
         StartCoroutine(GetWeatherFromServer());
     }
-    public IEnumerator GetWeatherFromServer()
+
+    IEnumerator GetWeatherFromServer()
     {
         using (UnityWebRequest webRequest = UnityWebRequest.Get("http://192.168.1.62/get-weather.php?location=westwood"))
         {
@@ -27,13 +30,25 @@ public class Web : MonoBehaviour
             }
             else
             {
-                Debug.Log(":\nReceived: " + webRequest.downloadHandler.text);
+                string[] weather = webRequest.downloadHandler.text.Split('|');
+                //Debug.Log(":\nReceived: " + webRequest.downloadHandler.text);
+                temp = weather[1];
+                status = weather[2];
             }
         }
+
+        
     }
 
-    
+    public float GetTemp()
+    {
+        return((float)Convert.ToDouble(temp));
+    }
 
-    
+    public string GetStatus()
+    {
+        return(status);
+    }
+ 
 
 }
