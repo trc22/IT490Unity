@@ -9,15 +9,14 @@ using System.Collections;
 
 public class Web : MonoBehaviour
 {
-    void Start()
-    {
-        // A correct website page.
-        StartCoroutine(GetText());
-    }
 
-    IEnumerator GetText()
+    void Awake()
     {
-        using (UnityWebRequest webRequest = UnityWebRequest.Get("http://192.168.1.62/"))
+        StartCoroutine(GetWeatherFromServer());
+    }
+    public IEnumerator GetWeatherFromServer()
+    {
+        using (UnityWebRequest webRequest = UnityWebRequest.Get("http://192.168.1.62/get-weather.php?location=westwood"))
         {
             // Request and wait for the desired page.
             yield return webRequest.SendWebRequest();
@@ -32,4 +31,9 @@ public class Web : MonoBehaviour
             }
         }
     }
+
+    
+
+    
+
 }
