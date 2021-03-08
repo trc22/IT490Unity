@@ -6,9 +6,10 @@ public class Player : NetworkBehaviour
 {
     public Transform playerTransform;
     float accel = 0.8f;
-    public Animator WeatherStage;
-    int delay;
-    [SerializeField]int threshold = 200;
+
+    public Animator WeatherStage; //Handles the Animations
+    int delay; //handles delays for effects
+    [SerializeField]int threshold = 200; //Handles the max amount of Delay
     enum Weather
     {
         REGULAR, RAIN, HOT, SNOW, HAIL, WIND, THUNDER
@@ -22,6 +23,7 @@ public class Player : NetworkBehaviour
         
         if (isLocalPlayer)
         {
+            //Handles Weather effects
             WeatherEffect();
             
         }

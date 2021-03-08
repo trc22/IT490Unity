@@ -9,14 +9,21 @@ public class Ball : NetworkBehaviour
     public Animator WeatherStage;
     
     public SpriteRenderer mySprite;
-    private bool change = false;
+    private bool change = false; //this change is used for all behaviors that increase or decrease things, is used so they dont infinetly do that.
+    private bool check = false; //this check is used for thunder behavio(as it works differently it needs its own in tandom with the 'change',
+                                // as its to check that it does not infinetly increase its speed.
     
-    private int delay =100;
+    
     enum Weather
     {
         REGULAR, RAIN, HOT, SNOW, HAIL, WIND, THUNDER
     }
     [SerializeField] Weather currentWeather = Weather.REGULAR;
+    enum Stages
+    {
+        OFF, NORMAL, FAST
+    }
+    Stages currentStage = Stages.OFF;
 
     public override void OnStartServer()
     {
@@ -28,23 +35,14 @@ public class Ball : NetworkBehaviour
         // Serve the ball from left player
         ball_rigidBody.velocity = Vector2.right * 2f;
     }
-    [ClientCallback]
-    void OnCollisionEnter2Ds(Collision2D col)
-    {
-        Debug.Log("Collision!");
-        //Paddle physics
-        if (col.collider.offset.y != -2.88f || col.collider.offset.y != -2.88f)
-        {
-            if (mySprite.flipX != true) mySprite.flipX = true;
 
-            else mySprite.flipX = false;
-        }
-    }
     [ServerCallback]
     void OnCollisionEnter2D(Collision2D col)
     {
         Debug.Log("Collision!");
         //Paddle physics
+
+        //Flips the sprite only when hiting the paddles
         if(col.collider.offset.y != -2.88f || col.collider.offset.y != -2.88f)
         {
             if (mySprite.flipX != true) mySprite.flipX = true;
@@ -52,21 +50,31 @@ public class Ball : NetworkBehaviour
             else mySprite.flipX = false;
         }
         
-        
+        //Function that handles weather effects
         WeatherEffect(col);
     }
+
     private void Update()
     {
+
         WeatherStage.SetInteger("Weather_Ball", (int)currentWeather);  
     }
 
-    IEnumerator Wait(Collision2D col)
+    IEnumerator Wait(Collision2D col,float start, float end, float secs)
     {
         change = false;
-        SpeedAndWeather(2f, col);
-        yield return new WaitForSeconds(1.2f);
+        if(check == false && currentWeather == Weather.THUNDER)
+        {
+            SpeedAndWeather(1f, col);
+            check = true;
+        }
+        else
+        {
+            SpeedAndWeather(start, col);
+        }
+        yield return new WaitForSeconds(secs);
         change = false;
-        SpeedAndWeather(.5f, col);
+        SpeedAndWeather(end, col);
         
         
     }
@@ -104,36 +112,41 @@ public class Ball : NetworkBehaviour
         else if (currentWeather == Weather.HAIL)
         {
            
+           if(currentStage == Stages.FAST || currentStage == Stages.OFF)
+            {
+                SpeedAndWeather(2f, col);
+                currentStage = Stages.NORMAL;
+            }
+            else
+            {
+                SpeedAndWeather(.5f, col);
+                currentStage = Stages.FAST;
+            }
         }
         //move fast
         else if (currentWeather == Weather.WIND)
         {
-            StartCoroutine(Wait(col));
+            StartCoroutine(Wait(col,4f,.25f,2f));
 
         }
         //move fast on bursts
         else if (currentWeather == Weather.THUNDER)
         {
-            while (delay <200)
-            {
-                delay += 5;
-                if (delay > 60)
-                {
-                    SpeedAndWeather(1f, col);
-                }
-                if (delay == 200) delay = 0;
+            StartCoroutine(Wait(col, .5f, 2f,1.2f));
 
-            }
-            
         }
     }
 
     void SpeedAndWeather(float speed, Collision2D col)
     {
         //if hit top collider
-
+        if (currentStage != Stages.OFF)
+        {
+            change = false;
+        }
         if (col.collider.offset.y == 0.08f)
         {
+            
             if (!change)
             {
                 ball_rigidBody.velocity += (Vector2.up) * speed;
