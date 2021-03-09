@@ -348,6 +348,7 @@ GameObject:
   - component: {fileID: 167295820}
   - component: {fileID: 167295819}
   - component: {fileID: 167295818}
+  - component: {fileID: 167295821}
   m_Layer: 0
   m_Name: EventSystem
   m_TagString: Untagged
@@ -403,6 +404,22 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &167295821
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 167295817}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 666bed1454d56fa43b1af1c42a6b3c30, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  username: {fileID: 2125940977}
+  password: {fileID: 1657324045}
+  location: {fileID: 1342729101}
+  date: {fileID: 621707022}
 --- !u!1 &169671117
 GameObject:
   m_ObjectHideFlags: 0
@@ -1043,7 +1060,7 @@ GameObject:
   - component: {fileID: 621707023}
   - component: {fileID: 621707022}
   m_Layer: 5
-  m_Name: Text
+  m_Name: Date_input
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1573,7 +1590,18 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1023065820}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 167295821}
+        m_MethodName: submit
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1023065820
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2416,7 +2444,7 @@ GameObject:
   - component: {fileID: 1342729102}
   - component: {fileID: 1342729101}
   m_Layer: 5
-  m_Name: Text
+  m_Name: Location_input
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3080,7 +3108,7 @@ GameObject:
   - component: {fileID: 1657324046}
   - component: {fileID: 1657324045}
   m_Layer: 5
-  m_Name: Text
+  m_Name: Password_input
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3957,7 +3985,7 @@ GameObject:
   - component: {fileID: 2125940978}
   - component: {fileID: 2125940977}
   m_Layer: 5
-  m_Name: Text
+  m_Name: Username_input
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
