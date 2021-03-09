@@ -14,15 +14,10 @@ public class Historical_Toggle : MonoBehaviour
     }
 
 
-    public void Update()
+    public void IsON()
     {
-        if (historicSettingToggle.isOn)
-        {
-            inputField.SetActive(true);
-        }
-        else
-        {
-            inputField.SetActive(false);
-        }
+        if (historicSettingToggle.isOn) inputField.SetActive(true);
+
+        else inputField.SetActive(false);
     }
 }
