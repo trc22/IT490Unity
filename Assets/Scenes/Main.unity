@@ -337,8 +337,8 @@ MonoBehaviour:
   autoStartServerBuild: 1
   showDebugMessages: 0
   serverTickRate: 30
-  offlineScene: 
-  onlineScene: 
+  offlineScene: Assets/Scenes/Login.unity
+  onlineScene: Assets/Scenes/Main.unity
   transport: {fileID: 207291380}
   networkAddress: localhost
   maxConnections: 4

@@ -33,13 +33,13 @@ public class Validation : MonoBehaviour
     public void SignUp() //adds a data to database through rabbit
     {
         
-        //turns input fields to string after button press
+        /*//turns input fields to string after button press
         _username = username.text;
         _password = password.text;
         _location = location.text;
         _date = date.text;
 
-        
+        */ sendUserToWebsite(); /*
 
         //debug log to check its being sent currectly
         //Debug.Log(_username+","+ _password + "," + _location + "," + _date);
@@ -70,7 +70,7 @@ public class Validation : MonoBehaviour
         else
         {
             SceneManager.LoadScene("Main");
-        }
+        }*/
 
 
 
@@ -123,7 +123,7 @@ public class Validation : MonoBehaviour
     /// </summary>
     public void sendUserToWebsite()
     {
-        urlToWebsite = "www.google.com";
+        urlToWebsite = "http://192.168.1.62/account_create.php";
         Application.OpenURL(urlToWebsite);
     }
 
@@ -149,6 +149,13 @@ public class Validation : MonoBehaviour
             if(response[1] == "login success")
             {
                 Debug.Log("Success!");
+                GameValues.username = _username;
+                GameValues.location = _location;
+                if(_date != null)
+                    GameValues.date = _date;
+                Debug.Log(GameValues.username + GameValues.location + GameValues.date);
+
+                SceneManager.LoadScene("Main");
             }
             else
             {    
