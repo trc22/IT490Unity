@@ -4,6 +4,8 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 using UnityEngine.SceneManagement;
+using UnityEngine.Networking;
+
 public class Validation : MonoBehaviour
 {
     public GameObject Access;
@@ -36,6 +38,8 @@ public class Validation : MonoBehaviour
         _password = password.text;
         _location = location.text;
         _date = date.text;
+
+        
 
         //debug log to check its being sent currectly
         //Debug.Log(_username+","+ _password + "," + _location + "," + _date);
@@ -89,7 +93,8 @@ public class Validation : MonoBehaviour
 
 
 
-
+        StartCoroutine(SendLoginRequest());
+        /*
 
         //----------------------------------------------------------------------------------------------
         //Checks if grant access still false and displays a window stating why
@@ -109,7 +114,7 @@ public class Validation : MonoBehaviour
         else
         {
             SceneManager.LoadScene("Main");
-        }
+        }*/
     }
 
 
@@ -120,5 +125,38 @@ public class Validation : MonoBehaviour
     {
         urlToWebsite = "www.google.com";
         Application.OpenURL(urlToWebsite);
+    }
+
+    IEnumerator SendLoginRequest()
+    {
+        WWWForm form = new WWWForm();
+        form.AddField("username", _username);
+        form.AddField("password", _password);
+
+
+        UnityWebRequest webRequest = UnityWebRequest.Post("http://192.168.1.62/unity-login.php", form);
+        
+        yield return webRequest.SendWebRequest();
+
+        if (webRequest.isNetworkError || webRequest.isHttpError)
+        {
+            Debug.Log(webRequest.error);
+        }
+        else
+        {
+            string[] response = webRequest.downloadHandler.text.Split('|');
+            //Debug.Log(":\nReceived: " + webRequest.downloadHandler.text);
+            if(response[1] == "login success")
+            {
+                Debug.Log("Success!");
+            }
+            else
+            {    
+                accessText.text = "Access Denied";
+                StartCoroutine(displayAcessDenied(1f));
+                username.text = null;
+                password.text = null;
+            }
+        }
     }
 }
