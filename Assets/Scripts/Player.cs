@@ -5,6 +5,7 @@ using System.Collections;
 public class Player : NetworkBehaviour
 {
     public Transform playerTransform;
+    public GameObject webManager;
     float accel = 0.8f;
 
     public Animator WeatherStage; //Handles the Animations
@@ -16,6 +17,11 @@ public class Player : NetworkBehaviour
     }
     [SerializeField]Weather currentWeather = Weather.REGULAR;
 
+    void Awake()
+    {
+        webManager= GameObject.Find("WebManager");
+        SetWeather(webManager.GetComponent<Web>().GetTemp(), webManager.GetComponent<Web>().GetStatus());
+    }
 
     void Movement()
     {
@@ -72,7 +78,7 @@ public class Player : NetworkBehaviour
         //move fast at randomtimes due to wind, but then slow back down
         else if (currentWeather == Weather.WIND)
         {
-            Debug.Log(delay);
+            //Debug.Log(delay);
             if (delay < 200){
                 if (delay > 100)
                 {
@@ -146,6 +152,63 @@ public class Player : NetworkBehaviour
         }
     }
     // Update is called once per frame
+
+     void SetWeather(float temp, string status)
+    {
+        Debug.Log("temp: " + temp + " status: " + status);
+        //Prioritize status effects over temp effects
+
+        //Status effects:
+        if(status == "rain" || status == "light rain" || status == "moderate rain" || status == "heavy intensity rain")
+        {
+            Debug.Log("Setting weather to rain!");
+            currentWeather = Weather.RAIN;
+            return;
+        }
+
+        if(status == "snow" || status == "light snow" || status == "heavy snow")
+        {
+            Debug.Log("Setting weather to snow!");
+            currentWeather = Weather.SNOW;
+            return;
+        }
+
+        if(status == "freezing rain")
+        {
+            Debug.Log("Setting weather to hail!");
+            currentWeather = Weather.HAIL;
+            return;
+        }
+        if(status == " thunderstorm" || status == " light thunderstorm " || status == " thunderstorm with rain " || status == "heavy thunderstorm")
+        {
+            Debug.Log("Setting weather to thunder!");
+            currentWeather = Weather.THUNDER;
+            return;
+        } 
+        if(Random.Range(0f, 2f) > 1f)
+        {
+            Debug.Log("Setting weather to windy!");
+            currentWeather = Weather.WIND;
+            return;
+        }
+        if(temp > 80f)
+        {
+            Debug.Log("Setting weather to hot!");
+            currentWeather = Weather.HOT;
+            return;
+        }
+        if(temp < 30)
+        {
+            Debug.Log("Setting weather to cold!");
+            currentWeather = Weather.HAIL;
+            return;
+        }
+            Debug.Log("Setting weather to regular");
+            currentWeather = Weather.REGULAR;
+            return;
+        
+    }
+
 
     void FixedUpdate()
     {

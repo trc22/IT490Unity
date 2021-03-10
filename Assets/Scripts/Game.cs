@@ -6,8 +6,8 @@ public class Game : NetworkBehaviour
 {
     [SyncVar] int lScore;
     [SyncVar] int rScore;
-    private string lName = "Left";
-    private string rName = "Right";
+    [SyncVar] string lName;
+    [SyncVar] string rName;
     private string victor = "";
     public Text lScore_text, rScore_text;
     public Text lName_text, rName_text, result_text;
@@ -24,6 +24,8 @@ public class Game : NetworkBehaviour
         GetText();
         lScore = 0;
         rScore = 0;
+        setLName();
+        setRName();
     }
 
     void Update()
@@ -33,6 +35,7 @@ public class Game : NetworkBehaviour
         if(networkManager == null)
             networkManager = GameObject.FindGameObjectWithTag("NetworkManager");
         RpcSyncScores(lScore, rScore);
+        RpcSyncNames(lName, rName);
         RpcSyncWinner(victor);
     }
 
@@ -69,27 +72,30 @@ public class Game : NetworkBehaviour
         result_text.text = victor;
     }
 
-    void UpdateNames()
+    void RpcSyncNames(string lVar, string rVar)
     {
+        lName = lVar;
+        rName = rVar;
         lName_text.text = lName;
         rName_text.text = rName;
-    }
-
-    public void UpdatePlayers(int target, string name)
-    {
-        if (target == 0)
-            lName = name;
-        else
-            rName = name;
-    
-        UpdateNames();
-
     }
 
     [ServerCallback]
     void GameOver()
     {
         networkManager.GetComponent<MyNetworkManager>().EndGame();
+    }
+
+    [ServerCallback]
+    void setLName()
+    {
+        lName = GameValues.username;
+    }
+
+    [ClientCallback]
+    void setRName()
+    {
+        rName = GameValues.username;
     }
 
     public void GetText()

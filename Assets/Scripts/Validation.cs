@@ -10,7 +10,7 @@ public class Validation : MonoBehaviour
 {
     public GameObject Access;
     public TextMeshProUGUI accessText;
-    private bool grantAccess = false;
+    //private bool grantAccess = false;
 
     public InputField username, password, location, date; //gets Input fields in the scene
     string _username, _password, _location, _date; //used to turn input fields into string
@@ -39,7 +39,7 @@ public class Validation : MonoBehaviour
         _location = location.text;
         _date = date.text;
 
-        */ sendUserToWebsite(); /*
+        */Application.OpenURL("http://192.168.1.62/account_create.php");/*
 
         //debug log to check its being sent currectly
         //Debug.Log(_username+","+ _password + "," + _location + "," + _date);
@@ -123,7 +123,7 @@ public class Validation : MonoBehaviour
     /// </summary>
     public void sendUserToWebsite()
     {
-        urlToWebsite = "http://192.168.1.62/account_create.php";
+        urlToWebsite = "http://192.168.1.62";
         Application.OpenURL(urlToWebsite);
     }
 

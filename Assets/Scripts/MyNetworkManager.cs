@@ -6,7 +6,6 @@ using Mirror;
 public class MyNetworkManager : NetworkManager
 {
     public Transform lSpawn, rSpawn;
-    public GameObject webManager;
     private int playerCount;
     GameObject player, ball, gameManager, canvas;
 

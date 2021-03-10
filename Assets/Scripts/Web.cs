@@ -3,14 +3,10 @@ using UnityEngine.Networking;
 using System.Collections;
 using System;
 
-// UnityWebRequest.Get example
-
-// Access a website and use UnityWebRequest.Get to download a page.
-// Also try to download a non-existing page. Display the error.
 
 public class Web : MonoBehaviour
 {
-    string temp, status;
+    string temp, status, url;
 
     void Awake()
     {
@@ -19,7 +15,16 @@ public class Web : MonoBehaviour
 
     IEnumerator GetWeatherFromServer()
     {
-        using (UnityWebRequest webRequest = UnityWebRequest.Get("http://192.168.1.62/get-weather.php?location=westwood"))
+        if(GameValues.date == null || GameValues.date == "null" || GameValues.date == "")
+        {
+            url = ("http://192.168.1.62/get-weather.php?location="+GameValues.location);
+        }
+        else
+        {
+            url = ("http://192.168.1.62/get-weather-historical.php?location="+GameValues.location+"&date="+GameValues.date);
+            Debug.Log(url);
+        }
+        using (UnityWebRequest webRequest = UnityWebRequest.Get(url))
         {
             // Request and wait for the desired page.
             yield return webRequest.SendWebRequest();
@@ -42,12 +47,16 @@ public class Web : MonoBehaviour
 
     public float GetTemp()
     {
+        if(GameValues.date == null || GameValues.date == "null")
+                return((float)((Convert.ToDouble(temp) - 273) * 9 / 5 + 32)); //Convert from kelvin to farenheit
+
         return((float)Convert.ToDouble(temp));
     }
 
     public string GetStatus()
     {
-        return(status);
+        status = status.ToLower();
+        return status; //Make
     }
  
 

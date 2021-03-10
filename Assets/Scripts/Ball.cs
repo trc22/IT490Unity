@@ -37,7 +37,6 @@ public class Ball : NetworkBehaviour
 
         webManager= GameObject.Find("WebManager");
 
-
         SetWeather(webManager.GetComponent<Web>().GetTemp(), webManager.GetComponent<Web>().GetStatus());
 
         if(Random.Range(0f, 2f) > 1f) //Serve ball in random dir
@@ -119,7 +118,7 @@ public class Ball : NetworkBehaviour
             return;
         }
 
-        if(status == "Snow" || status == "light snow" || status == "Heavy Snow")
+        if(status == "snow" || status == "light snow" || status == "heavy snow")
         {
             Debug.Log("Setting weather to snow!");
             currentWeather = Weather.SNOW;
@@ -144,13 +143,13 @@ public class Ball : NetworkBehaviour
             currentWeather = Weather.WIND;
             return;
         }
-        if(temp > 303f)
+        if(temp > 80f)
         {
             Debug.Log("Setting weather to hot!");
             currentWeather = Weather.HOT;
             return;
         }
-        if(temp < 278f)
+        if(temp < 30)
         {
             Debug.Log("Setting weather to cold!");
             currentWeather = Weather.HAIL;
