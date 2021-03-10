@@ -11,7 +11,8 @@ public class Game : NetworkBehaviour
     private string victor = "";
     public Text lScore_text, rScore_text;
     public Text lName_text, rName_text, result_text;
-    public GameObject networkManager;
+    public GameObject networkManager, webManager, lPlayer, rPlayer;
+    public GameObject[] players;
     
 
     public override void OnStartServer()
@@ -20,22 +21,36 @@ public class Game : NetworkBehaviour
         Debug.Log("Game Manager is active");
 
         networkManager = GameObject.FindGameObjectWithTag("NetworkManager");
+        webManager= GameObject.Find("WebManager");
 
-        GetText();
+        lName = null;
+        rName = null;
+
         lScore = 0;
         rScore = 0;
-        setLName();
-        setRName();
+
+        GetText();
+        SetupPlayers();
+
     }
 
     void Update()
-    {
+    {           
         if(lScore_text == null)
             GetText();
         if(networkManager == null)
             networkManager = GameObject.FindGameObjectWithTag("NetworkManager");
+
+        if(lName != null && rName != null && lName != "" && rName != "")
+        {
+            RpcSyncNames(lName, rName);
+        }
+        else
+        {
+            SetupPlayers();
+        }
         RpcSyncScores(lScore, rScore);
-        RpcSyncNames(lName, rName);
+
         RpcSyncWinner(victor);
     }
 
@@ -86,18 +101,6 @@ public class Game : NetworkBehaviour
         networkManager.GetComponent<MyNetworkManager>().EndGame();
     }
 
-    [ServerCallback]
-    void setLName()
-    {
-        lName = GameValues.username;
-    }
-
-    [ClientCallback]
-    void setRName()
-    {
-        rName = GameValues.username;
-    }
-
     public void GetText()
     {
         lScore_text = GameObject.Find("LScore").GetComponent<Text>();
@@ -106,4 +109,25 @@ public class Game : NetworkBehaviour
         rName_text = GameObject.Find("RName").GetComponent<Text>();
         result_text = GameObject.Find("Results").GetComponent<Text>();
     }
+
+    void SetupPlayers()
+    {
+        players = GameObject.FindGameObjectsWithTag("Player");
+        foreach (GameObject player in players)
+        {
+            if(player.transform.position.x == -10)
+            {
+                lPlayer = player;
+                lName = lPlayer.GetComponent<Player>().GetPlayerName();
+                Debug.Log("L player = " + lName);
+            }
+            else if (player.transform.position.x == 10)
+            {
+                rPlayer = player;
+                rName = rPlayer.GetComponent<Player>().GetPlayerName();
+                Debug.Log("R player = " + rName);
+            }
+        }
+    }
+
 }

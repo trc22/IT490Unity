@@ -5,8 +5,11 @@ using System.Collections;
 public class Player : NetworkBehaviour
 {
     public Transform playerTransform;
-    public GameObject webManager;
+    public GameObject webManager, gameManager;
     float accel = 0.8f;
+
+    [SyncVar]
+    public string playerName;
 
     public Animator WeatherStage; //Handles the Animations
     int delay; //handles delays for effects
@@ -23,9 +26,13 @@ public class Player : NetworkBehaviour
         SetWeather(webManager.GetComponent<Web>().GetTemp(), webManager.GetComponent<Web>().GetStatus());
     }
 
+    public override void OnStartClient()
+    {
+        SetPlayerName(GameValues.username);
+    }
+
     void Movement()
     {
-        
         
         if (isLocalPlayer)
         {
@@ -209,9 +216,27 @@ public class Player : NetworkBehaviour
         
     }
 
+    public string GetPlayerName()
+    {
+        return playerName;
+    }
+
+
 
     void FixedUpdate()
     {
         Movement();
+    }
+  
+    [Client]
+    public void SetPlayerName(string player)
+    {
+        CmdSyncName(player);
+    }
+  
+    [Command]
+    void CmdSyncName(string name)
+    {
+        playerName = name;
     }
 }

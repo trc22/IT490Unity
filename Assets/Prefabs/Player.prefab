@@ -21,7 +21,7 @@ GameObject:
   - component: {fileID: -7215058826484688551}
   m_Layer: 0
   m_Name: Player
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -220,6 +220,9 @@ MonoBehaviour:
   syncMode: 0
   syncInterval: 0.1
   playerTransform: {fileID: 2060714281064709877}
+  webManager: {fileID: 0}
+  gameManager: {fileID: 0}
+  playerName: 
   WeatherStage: {fileID: 6430257390238323727}
   threshold: 200
   currentWeather: 0
