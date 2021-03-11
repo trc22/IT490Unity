@@ -84,6 +84,30 @@ public class Validation : MonoBehaviour
         _location = location.text;
         _date = date.text;
 
+        if(_username == "" || _username == null)
+        {
+                accessText.text = "Username is blank";
+                StartCoroutine(displayAcessDenied(1f));
+                username.text = null;
+                return;
+        }
+
+        if(_password == "" || password == null)
+        {
+                accessText.text = "Password is blank";
+                StartCoroutine(displayAcessDenied(1f));
+                password.text = null;
+                return;
+        }
+
+        if(_location == "" || _location == null)
+        {
+                accessText.text = "location is blank";
+                StartCoroutine(displayAcessDenied(1f));
+                location.text = null;
+                return;
+        }
+
         //debug log to check its being sent currectly
         //Debug.Log(_username + "," + _password + "," + _location + "," + _date);
 
