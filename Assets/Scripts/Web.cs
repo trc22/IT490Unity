@@ -47,7 +47,7 @@ public class Web : MonoBehaviour
 
     public float GetTemp()
     {
-        if(GameValues.date == null || GameValues.date == "null")
+        if(GameValues.date == null || GameValues.date == "null" || GameValues.date == "")
                 return((float)((Convert.ToDouble(temp) - 273) * 9 / 5 + 32)); //Convert from kelvin to farenheit
 
         return((float)Convert.ToDouble(temp));
