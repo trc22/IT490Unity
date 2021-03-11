@@ -9,6 +9,7 @@ public class Game : NetworkBehaviour
     [SyncVar] string lName;
     [SyncVar] string rName;
     private string victor = "";
+    bool sent;
     public Text lScore_text, rScore_text;
     public Text lName_text, rName_text, result_text;
     public GameObject networkManager, webManager, lPlayer, rPlayer;
@@ -22,6 +23,8 @@ public class Game : NetworkBehaviour
 
         networkManager = GameObject.FindGameObjectWithTag("NetworkManager");
         webManager= GameObject.Find("WebManager");
+
+        sent = false;
 
         lName = null;
         rName = null;
@@ -98,7 +101,16 @@ public class Game : NetworkBehaviour
     [ServerCallback]
     void GameOver()
     {
-        networkManager.GetComponent<MyNetworkManager>().EndGame();
+        if(!sent)
+        {
+            string lWeather = lPlayer.GetComponent<Player>().GetPlayerWeather();
+            string rWeather = rPlayer.GetComponent<Player>().GetPlayerWeather();
+            if(victor == lName)
+                networkManager.GetComponent<MyNetworkManager>().EndGame(lName, rName, lScore, rScore, lWeather, rWeather);
+            else
+                networkManager.GetComponent<MyNetworkManager>().EndGame(rName, lName, rScore, lScore, rWeather, lWeather);
+            sent = true;
+        }
     }
 
     public void GetText()

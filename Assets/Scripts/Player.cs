@@ -239,4 +239,34 @@ public class Player : NetworkBehaviour
     {
         playerName = name;
     }
+
+    public string GetPlayerWeather()
+    {
+        string returnValue = "Clear";
+        switch (currentWeather)
+        {
+            case Weather.REGULAR:
+                returnValue = "Clear";
+                break;
+            case Weather.RAIN:
+                returnValue = "Rain";
+                break;
+            case Weather.HOT:
+                returnValue = "Hot";
+                break;
+            case Weather.SNOW:
+                returnValue = "Snow";
+                break;
+            case Weather.HAIL: 
+                returnValue = "Hail";
+                break;
+            case Weather.WIND:
+                returnValue = "Wind";
+                break;
+            case Weather.THUNDER:
+                returnValue = "Thunder";
+                break;
+        }
+        return returnValue;
+    }
 }

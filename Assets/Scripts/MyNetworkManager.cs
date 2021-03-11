@@ -1,5 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using UnityEngine.Networking;
+using System;
 using UnityEngine;
 using Mirror;
 
@@ -9,7 +11,9 @@ public class MyNetworkManager : NetworkManager
     private int playerCount;
     GameObject player, ball, gameManager, canvas;
 
-
+    string _winner, _loser, _wweather, _lweather;
+    int _wscore, _lscore;
+    
     public override void OnStartServer()
     {
         Debug.Log("Server Started!");
@@ -71,10 +75,41 @@ public class MyNetworkManager : NetworkManager
         base.OnServerDisconnect(conn);
     }
 
-    public void EndGame()
-    {
+    public void EndGame(string winner, string loser, int wscore, int lscore, string wweather,  string lweather)
+    {   _winner = winner;
+        _loser = loser;
+        _wscore = wscore;
+        _lscore = lscore; 
+        _wweather = wweather;
+        _lweather = lweather; 
+
         if (ball != null)
             NetworkServer.Destroy(ball);
+        StartCoroutine(SendResults());
+    }
+
+    IEnumerator SendResults()
+    {
+        WWWForm form = new WWWForm();
+        form.AddField("winner", _winner);
+        form.AddField("loser", _loser);
+        form.AddField("wscore", _wscore);
+        form.AddField("lscore", _lscore);
+        form.AddField("wweather", _wweather);
+        form.AddField("lweather", _lweather);
+
+        UnityWebRequest webRequest = UnityWebRequest.Post("http://192.168.1.62/get-match-results.php", form);
+        
+        yield return webRequest.SendWebRequest();
+
+        if (webRequest.isNetworkError || webRequest.isHttpError)
+        {
+            Debug.Log(webRequest.error);
+        }
+        else
+        {
+            Debug.Log("Results sent.");
+        }
     }
 
 }
