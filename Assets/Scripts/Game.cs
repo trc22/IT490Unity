@@ -77,12 +77,12 @@ public class Game : NetworkBehaviour
     void RpcSyncWinner(string winner)
     {
         victor = winner;
-        if(lScore == 1) //Left wins
+        if(lScore == 7) //Left wins
         {
             victor = (lName + " wins!");
             GameOver();
         }
-        else if (rScore == 1) //Right wins
+        else if (rScore == 7) //Right wins
         {
             victor = (rName + " wins!");
             GameOver();

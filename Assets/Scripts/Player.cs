@@ -240,6 +240,7 @@ public class Player : NetworkBehaviour
         playerName = name;
     }
 
+
     public string GetPlayerWeather()
     {
         string returnValue = "Clear";

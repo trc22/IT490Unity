@@ -98,7 +98,7 @@ public class MyNetworkManager : NetworkManager
         form.AddField("wweather", _wweather);
         form.AddField("lweather", _lweather);
 
-        UnityWebRequest webRequest = UnityWebRequest.Post("http://192.168.1.62/get-match-results.php", form);
+        UnityWebRequest webRequest = UnityWebRequest.Post("http://25.14.165.46/get-match-results.php", form);
         
         yield return webRequest.SendWebRequest();
 

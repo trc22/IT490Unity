@@ -147,7 +147,7 @@ public class Validation : MonoBehaviour
     /// </summary>
     public void sendUserToWebsite()
     {
-        urlToWebsite = "http://192.168.1.62";
+        urlToWebsite = "http://25.14.165.46";
         Application.OpenURL(urlToWebsite);
     }
 
@@ -158,7 +158,7 @@ public class Validation : MonoBehaviour
         form.AddField("password", _password);
 
 
-        UnityWebRequest webRequest = UnityWebRequest.Post("http://192.168.1.62/unity-login.php", form);
+        UnityWebRequest webRequest = UnityWebRequest.Post("http://25.14.165.46/unity-login.php", form);
         
         yield return webRequest.SendWebRequest();
 

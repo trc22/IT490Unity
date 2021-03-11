@@ -17,11 +17,11 @@ public class Web : MonoBehaviour
     {
         if(GameValues.date == null || GameValues.date == "null" || GameValues.date == "")
         {
-            url = ("http://192.168.1.62/get-weather.php?location="+GameValues.location);
+            url = ("http://25.14.165.46/get-weather.php?location="+GameValues.location);
         }
         else
         {
-            url = ("http://192.168.1.62/get-weather-historical.php?location="+GameValues.location+"&date="+GameValues.date);
+            url = ("http://25.14.165.46/get-weather-historical.php?location="+GameValues.location+"&date="+GameValues.date);
             Debug.Log(url);
         }
         using (UnityWebRequest webRequest = UnityWebRequest.Get(url))
