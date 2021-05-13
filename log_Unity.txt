@@ -1,0 +1,325 @@
+commit e28c01dca363b8b1152fdeb0b0ec8d0944ca5352
+Author: Jb645 <50148003+Jb645@users.noreply.github.com>
+Date:   Thu May 13 09:42:35 2021 -0400
+
+    Added Chat, Unstable Build
+
+commit d74301e519968797cdf2b99cfe0484886a843cb9
+Author: Jb645 <50148003+Jb645@users.noreply.github.com>
+Date:   Wed May 12 20:31:07 2021 -0400
+
+    Added More Things, and Edited Sync for Hats
+
+commit 2de71f2d80eb2d6efa82b30f60bfdd27eaad0c11
+Author: Jb645 <50148003+Jb645@users.noreply.github.com>
+Date:   Wed May 12 18:10:06 2021 -0400
+
+    Added Hats to Player
+
+commit 1ca054d3be46361c3cb959b8ce2a555e71e396b9
+Author: Jb645 <50148003+Jb645@users.noreply.github.com>
+Date:   Wed May 12 17:26:55 2021 -0400
+
+    Added Hats
+
+commit 126c7b581d65d337959c6f712c87b6fba5a5b14a
+Author: Jb645 <50148003+Jb645@users.noreply.github.com>
+Date:   Wed May 12 16:50:46 2021 -0400
+
+    Added README.txt
+
+commit 3bcc25024b4aea24e901d03feefbc58f4b793590
+Author: Tim <trc22@njit.edu>
+Date:   Wed Mar 10 23:25:49 2021 -0500
+
+    General bug fixes and set up for Hamachi
+
+commit 1b2778913a5babeffe37155bd7244e40c5a3283d
+Author: Tim <trc22@njit.edu>
+Date:   Wed Mar 10 21:11:35 2021 -0500
+
+    Added checks to see if username/password/location is blank before sending data to webserver
+
+commit a9d8b4cdcb121654f2ef890d63dc111c3d9e7472
+Author: Tim <trc22@njit.edu>
+Date:   Wed Mar 10 21:10:54 2021 -0500
+
+    Fixed a bug when converting weather data
+
+commit 36ec2cbece984ca8b629343fc45ccde67619a4ea
+Author: Tim <trc22@njit.edu>
+Date:   Wed Mar 10 20:28:00 2021 -0500
+
+    Game now sends match results to webserver/rabbitmq
+
+commit 0780f85cda95da75aba85773a3cff440af357db4
+Author: Tim <trc22@njit.edu>
+Date:   Wed Mar 10 15:52:01 2021 -0500
+
+    Names are now synced up
+
+commit aeafbee84049966913b373de31859b01f4ff83f7
+Author: Tim <trc22@njit.edu>
+Date:   Wed Mar 10 00:22:08 2021 -0500
+
+    Login page all set up. Users can get current/historical weather from API. Still need to sync player names and setup results
+
+commit d6bfcbca95d52b1f23bfeaeca662283dde5b959b
+Author: Tim <trc22@njit.edu>
+Date:   Tue Mar 9 21:46:28 2021 -0500
+
+    Users can log in through the server, user information is stored for game
+
+commit 8c9a30eb729c296e4fc4f019b3c9016fcc1b311a
+Author: Tim <trc22@njit.edu>
+Date:   Tue Mar 9 20:27:38 2021 -0500
+
+    Will now login through webserver
+
+commit 29b1b8bb5ab401f717738d8ce0b918409bcf0111
+Author: Jb645 <50148003+Jb645@users.noreply.github.com>
+Date:   Tue Mar 9 15:48:51 2021 -0500
+
+    Added a way to show if access has been denied, username is taken, and added a way to get to Webserver
+
+commit d7cbe4c06b4831df4a114b17cf3d0dd026d0a644
+Author: Jb645 <50148003+Jb645@users.noreply.github.com>
+Date:   Tue Mar 9 14:43:54 2021 -0500
+
+    Restricted Username to Numbers and Letters
+
+commit 8c0573ab6e88db6af651c8fd4e63fc6eacc97607
+Author: Jb645 <50148003+Jb645@users.noreply.github.com>
+Date:   Tue Mar 9 14:39:30 2021 -0500
+
+    added comments for Validation script and Input Script
+
+commit 1afe63aa97c80c767b5dbf6c4866490629141e3b
+Author: Jb645 <50148003+Jb645@users.noreply.github.com>
+Date:   Tue Mar 9 14:21:40 2021 -0500
+
+    fixed Date Bugg(made slashes when pressing letters) and added test Validation Script(to check if inputs could be turned to strings for later)
+
+commit a81a2eb6714f337f47cc58dc393096e4a602ffa5
+Author: Jb645 <50148003+Jb645@users.noreply.github.com>
+Date:   Tue Mar 9 13:51:48 2021 -0500
+
+    forgot to save for Previous commit
+
+commit 551a0046646ec0de2a2ad7d58c98e1ee57041088
+Author: Jb645 <50148003+Jb645@users.noreply.github.com>
+Date:   Tue Mar 9 13:50:35 2021 -0500
+
+    Added Location, and Edited Input Field Script to allow Character Validation to Include dates
+
+commit f0f88990754485d9650c9b396b5afcfb85a8f329
+Author: Jb645 <50148003+Jb645@users.noreply.github.com>
+Date:   Tue Mar 9 12:55:39 2021 -0500
+
+    added Historical Settings toggle
+
+commit 3cffff86d992640a44465fa2fa2331288ca54d5b
+Merge: edfce6e d2d2c80
+Author: Jb645 <50148003+Jb645@users.noreply.github.com>
+Date:   Mon Mar 8 17:59:48 2021 -0500
+
+    correctly Merged Animation
+
+commit edfce6e6c02710bcb42406208e3bca0040c50dba
+Author: Jb645 <50148003+Jb645@users.noreply.github.com>
+Date:   Mon Mar 8 17:49:27 2021 -0500
+
+    merged Animation
+
+commit 435bbb126daba6e76e2d4eb36c4a7024c5a6754b
+Merge: 2fbd1f3 3b890c4
+Author: Tim <trc22@njit.edu>
+Date:   Mon Mar 8 17:43:19 2021 -0500
+
+    Merge branch 'master' of https://github.com/trc22/IT490Unity
+
+commit 2fbd1f3292095884be62f23542180e244cda909f
+Author: Tim <trc22@njit.edu>
+Date:   Mon Mar 8 17:36:20 2021 -0500
+
+    Getting/setting weather effects on ball
+
+commit d2d2c803d4f006480505b3cade19a8d0fe08da8e
+Author: Jb645 <50148003+Jb645@users.noreply.github.com>
+Date:   Mon Mar 8 17:13:36 2021 -0500
+
+    Login and LeaderBoard Ready
+
+commit efddd3415d0e62c2397bc20b86e14e497ae07d9b
+Author: Jb645 <50148003+Jb645@users.noreply.github.com>
+Date:   Mon Mar 8 17:02:23 2021 -0500
+
+    Added and edited Login and LeaderBoard scenes
+
+commit 3b890c424e5a90230c268d395cb52c11ffecef11
+Author: Jb645 <50148003+Jb645@users.noreply.github.com>
+Date:   Mon Mar 8 15:54:54 2021 -0500
+
+    Added Some Comments
+
+commit 86c11f4a65d20ff4618675a0d1d81f5f2a509912
+Author: Tim <trc22@njit.edu>
+Date:   Sun Mar 7 22:42:31 2021 -0500
+
+    Gets weather from webserver, doesn't parse through info yet
+
+commit 95c5d5dc3bd9d714572e136eebc6b659c3ef0ed6
+Author: Tim <trc22@njit.edu>
+Date:   Sun Mar 7 21:56:28 2021 -0500
+
+    Manually merged master and Animation branch (data loss occurs when merge conflicts happen with .prefab files)
+
+commit ae9fdbe7d60ed92b7719e9da4d4497df6549e118
+Author: Tim <trc22@njit.edu>
+Date:   Sun Mar 7 21:23:22 2021 -0500
+
+    Webserver communicates with game
+
+commit 7c0fe643c10469c2518f16da50af9a8e3d4ecca8
+Author: Jb645 <50148003+Jb645@users.noreply.github.com>
+Date:   Sun Mar 7 20:37:26 2021 -0500
+
+    Completed all the behavior effects
+
+commit eb83b77b9320f4ed3d683149cd33b4199b77a0aa
+Author: Jb645 <50148003+Jb645@users.noreply.github.com>
+Date:   Thu Mar 4 13:05:47 2021 -0500
+
+    Editted Collision boundaries(changed them), Fixed 3/5 of Behavoir bugs
+
+commit 34879e28667b1f8964c66853a8258fa8eb01463f
+Author: Jb645 <50148003+Jb645@users.noreply.github.com>
+Date:   Thu Mar 4 11:25:08 2021 -0500
+
+    Completed Behaviors, this is a commit before troubleshooting them
+
+commit b6197b98f860b604999dd8beaad32e58984522bf
+Author: Jb645 <50148003+Jb645@users.noreply.github.com>
+Date:   Tue Mar 2 09:37:26 2021 -0500
+
+    Added more Effects for paddle and Ball, and edited their interactions
+
+commit b475c25bac679b6467a975e918c3921adcbca26e
+Author: Tim <trc22@njit.edu>
+Date:   Sun Feb 28 21:05:46 2021 -0500
+
+    Added winning/losing and game over
+
+commit d8e84ce96cf62716e96844909df0459f1877b557
+Author: Tim <trc22@njit.edu>
+Date:   Sun Feb 28 01:44:07 2021 -0500
+
+    Setting up game over
+
+commit be75c503bf54b1ed3de9cfb0fca4a8f2ff4ba8da
+Author: Tim <trc22@njit.edu>
+Date:   Sat Feb 27 21:43:39 2021 -0500
+
+    Scoring system added w/ data synchronization betweem client/server
+
+commit 19c2a71e3569f3016027ffc64da9ac2839a69330
+Author: Tim <trc22@njit.edu>
+Date:   Sat Feb 27 17:23:53 2021 -0500
+
+    Updated ball and paddle physics + foundation for scoring
+
+commit cc0473c1f65acf879b558034609a354fc25b0167
+Author: Jb645 <50148003+Jb645@users.noreply.github.com>
+Date:   Thu Feb 25 13:04:56 2021 -0500
+
+    Added Animation code for Paddle
+
+commit 5df5171cd14a310f3fcad29895cc7978eaaf3f0a
+Author: Jb645 <50148003+Jb645@users.noreply.github.com>
+Date:   Thu Feb 25 12:46:10 2021 -0500
+
+    added some coded movement Effects to Paddle
+
+commit b1480d368179254179f241ab90d28cb9fa282a45
+Author: Jb645 <50148003+Jb645@users.noreply.github.com>
+Date:   Thu Feb 25 12:08:50 2021 -0500
+
+    tested and fixed some Issues
+
+commit 9d527596477f72e1ecdcdb7bbf790c8cf30e096a
+Author: Jb645 <50148003+Jb645@users.noreply.github.com>
+Date:   Thu Feb 25 12:04:25 2021 -0500
+
+    REworked Colliders and Physics (code), Finished Animations
+
+commit 45f2b1bc01de765e724239be3f46dde8eb8055ad
+Author: Jb645 <50148003+Jb645@users.noreply.github.com>
+Date:   Wed Feb 24 22:53:46 2021 -0500
+
+    Added some Animations(paddle)_saved
+
+commit b669d905bc8862f4853fcd784b013900fb18ec70
+Author: Jb645 <50148003+Jb645@users.noreply.github.com>
+Date:   Wed Feb 24 22:52:37 2021 -0500
+
+    Added some Animations(paddle)
+
+commit 3b850746bc4f038f19adcf4a11c3e1d5e5a0b31a
+Author: Jb645 <50148003+Jb645@users.noreply.github.com>
+Date:   Wed Feb 24 21:17:11 2021 -0500
+
+    set up git lfs
+
+commit 2a31dc437596336c96d89bbe4f6a7caeb40471a5
+Author: Tim <trc22@njit.edu>
+Date:   Wed Feb 24 21:09:06 2021 -0500
+
+    Ball physics + boundaries
+
+commit da0c7c0874d292667c0ace9ed9328f14bfdda017
+Author: Tim <trc22@njit.edu>
+Date:   Tue Feb 23 20:23:40 2021 -0500
+
+    Added ball w/physics
+
+commit 4a015d0848c5416e262432ef2080754d90364a56
+Author: Tim <trc22@njit.edu>
+Date:   Tue Feb 23 19:13:27 2021 -0500
+
+    Basic player script w/ networking
+
+commit 603cccace2f126f6a286a542014b50460abf9e0c
+Author: Tim <trc22@njit.edu>
+Date:   Tue Feb 23 12:30:27 2021 -0500
+
+    Imported simple web transport package
+
+commit 018bcd9015a95e91edb830767b62be723411266f
+Author: Tim <trc22@njit.edu>
+Date:   Tue Feb 23 12:27:57 2021 -0500
+
+    Setting up project
+
+commit 1d89bc4422ec82584498ddb1cef0794c6859e5dd
+Author: Neil Shah <shahjneil@gmail.com>
+Date:   Mon Oct 26 20:13:46 2020 -0700
+
+    dedicated servers
+
+commit 1241e372d73ea81c06bc4a37a603c919d5a1fd4d
+Author: Neil Shah <shahjneil@gmail.com>
+Date:   Tue Oct 13 01:12:55 2020 -0700
+
+    data sync tutorial
+
+commit 25cc61a13633fd290825a11ec4a31bdcc628cb0c
+Author: Neil Shah <shahjneil@gmail.com>
+Date:   Wed Sep 30 12:02:55 2020 -0700
+
+    Hello world - multiplayer edition
+
+commit 7d98d625b9d0924abdc51d2591674198e31583ba
+Author: Neil Shah <shahjneil@gmail.com>
+Date:   Wed Sep 30 11:25:33 2020 -0700
+
+    Initial unity project
