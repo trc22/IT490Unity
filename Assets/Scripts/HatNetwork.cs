@@ -20,7 +20,7 @@ public class HatNetwork : NetworkBehaviour
     {
         
     }
-
+    
     // Update is called once per frame
     [ClientCallback]
     void Update()
