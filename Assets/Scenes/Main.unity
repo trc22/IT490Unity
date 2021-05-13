@@ -355,7 +355,6 @@ MonoBehaviour:
   - {fileID: 6955339606610645201, guid: b247688334b0f0049bce98c554d55bbc, type: 3}
   lSpawn: {fileID: 1106318936}
   rSpawn: {fileID: 239033294}
-  webManager: {fileID: 795838343}
 --- !u!4 &207291382
 Transform:
   m_ObjectHideFlags: 0
